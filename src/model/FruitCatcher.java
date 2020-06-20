@@ -18,7 +18,7 @@ public class FruitCatcher {
 
 	public FruitCatcher() {
 		try {
-			img = ImageIO.read(new File("src/files/images/girlcatch.png"));
+			img = ImageIO.read(new File("files/images/girlcatch.png"));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

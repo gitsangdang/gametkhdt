@@ -30,7 +30,7 @@ public class ConTrolVolumeThread extends JPanel implements Runnable {
 	public ConTrolVolumeThread() {
 		thread = new Thread(this);
 		try {
-			AudioInputStream audio = AudioSystem.getAudioInputStream(new File("src/files/musics/music.wav"));
+			AudioInputStream audio = AudioSystem.getAudioInputStream(new File("files/musics/music.wav"));
 			soundClip = AudioSystem.getClip();
 			soundClip.open(audio);
 			soundClip.loop(soundClip.LOOP_CONTINUOUSLY);
@@ -50,7 +50,7 @@ public class ConTrolVolumeThread extends JPanel implements Runnable {
 		}
 		try {
 			buttonClip = AudioSystem.getClip();
-			buttonClip.open(AudioSystem.getAudioInputStream(new File("src/files/musics/button2.wav")));
+			buttonClip.open(AudioSystem.getAudioInputStream(new File("files/musics/button2.wav")));
 			controlButton = (FloatControl) buttonClip.getControl(FloatControl.Type.MASTER_GAIN);
 			controlButton.setValue(0);
 

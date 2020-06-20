@@ -22,7 +22,7 @@ public class AboutGamePanel extends JPanel {
 	public AboutGamePanel() {
 
 		try {
-			arrowKey = ImageIO.read(new File("src/files/images/arrowkey.png"));
+			arrowKey = ImageIO.read(new File("files/images/arrowkey.png"));
 
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -31,7 +31,7 @@ public class AboutGamePanel extends JPanel {
 		JLabel arrowKeyLabel = new JLabel(new ImageIcon(arrowKey));
 		arrowKeyLabel.setLocation(400, 300);
 		arrowKeyLabel.setSize(200, 130);
-		JLabel backGround = new JLabel(new ImageIcon("src/files/images/fruitbg.jpg"));
+		JLabel backGround = new JLabel(new ImageIcon("files/images/fruitbg.jpg"));
 		backGround.setLocation(0, 0);
 		backGround.setSize(800, 800);
 		backGround.add(arrowKeyLabel);

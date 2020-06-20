@@ -35,7 +35,7 @@ public class FruitsControlThread implements Runnable {
 
 		try {
 			goalSound = AudioSystem.getClip();
-			goalSound.open(AudioSystem.getAudioInputStream(new File("src/files/musics/point.wav")));
+			goalSound.open(AudioSystem.getAudioInputStream(new File("files/musics/point.wav")));
 
 		} catch (LineUnavailableException e) {
 			// TODO Auto-generated catch block
@@ -50,7 +50,7 @@ public class FruitsControlThread implements Runnable {
 		thread = new Thread(this);
 		this.fruit = fruit;
 		try {
-			explosionImg = ImageIO.read(new File("src/files/images/explosionicon.png"));
+			explosionImg = ImageIO.read(new File("files/images/explosionicon.png"));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
