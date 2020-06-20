@@ -103,7 +103,7 @@ public class Frame extends JFrame {
 		frameControl = new MainControlPanel();
 		frameControl.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));
 
-		JLabel backGround = new JLabel(new ImageIcon("src/images/backGround.jpg"));
+		JLabel backGround = new JLabel(new ImageIcon("src/files/images/backGround.jpg"));
 		backGround.setSize(800, 800);
 		backGround.setLocation(0, 0);
 		add(backGround);
@@ -134,7 +134,7 @@ public class Frame extends JFrame {
 		highScore.setFont(new Font("Serif", Font.ITALIC, 20));
 		backGround.add(highScore);
 		try {
-			FileReader readHighScore = new FileReader("src/data/highScore.txt");
+			FileReader readHighScore = new FileReader("src/files/data/highScore.txt");
 			BufferedReader readFile = new BufferedReader(readHighScore);
 			String tam = readFile.readLine();
 			if (tam != null) {
@@ -288,7 +288,7 @@ public class Frame extends JFrame {
 
 		// nút exit nằm ở vị trí đặc biệt
 		frameButton[6] = new JButton();
-		frameButton[6].setIcon(new ImageIcon("exitbutton.png"));
+		frameButton[6].setIcon(new ImageIcon("src/files/images/exitbutton.png"));
 		frameButton[6].setSize(200, 50);
 		frameButton[6].setLocation(300, 700);
 		frameButton[6].setBorder(BorderFactory.createEmptyBorder());

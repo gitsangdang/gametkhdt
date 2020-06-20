@@ -22,7 +22,7 @@ public class AboutGamePanel extends JPanel {
 	public AboutGamePanel() {
 
 		try {
-			arrowKey = ImageIO.read(new File("src/images/arrowkey.png"));
+			arrowKey = ImageIO.read(new File("src/files/images/arrowkey.png"));
 
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -31,7 +31,7 @@ public class AboutGamePanel extends JPanel {
 		JLabel arrowKeyLabel = new JLabel(new ImageIcon(arrowKey));
 		arrowKeyLabel.setLocation(400, 300);
 		arrowKeyLabel.setSize(200, 130);
-		JLabel backGround = new JLabel(new ImageIcon("src/images/fruitbg.jpg"));
+		JLabel backGround = new JLabel(new ImageIcon("src/files/images/fruitbg.jpg"));
 		backGround.setLocation(0, 0);
 		backGround.setSize(800, 800);
 		backGround.add(arrowKeyLabel);
@@ -55,7 +55,7 @@ public class AboutGamePanel extends JPanel {
 		}
 		memberInformation[0] = new JLabel("Tìm hiểu và xây dựng bởi nhóm 15:");
 		memberInformation[1] = new JLabel("1.16130543-Đặng Thanh Sang");
-		memberInformation[2] = new JLabel("2.16130543- Phạm Bùi Tuấn Thành");
+		memberInformation[2] = new JLabel("2.16130579- Phạm Bùi Tuấn Thành");
 		memberInformation[3] = new JLabel("3.15130024-Trần Văn Đăng");
 		for (int i = 0; i < memberInformation.length; i++) {
 			memberInformation[i].setFont(new Font("Serif", Font.ROMAN_BASELINE, 20));

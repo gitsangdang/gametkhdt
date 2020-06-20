@@ -98,8 +98,8 @@ public class MainControlPanel extends JPanel implements Runnable {
 
 	public void continueGame() {
 		try {
-			FileReader fr = new FileReader("src/data/data.txt");
-			FileReader fr2 = new FileReader("src/data/point.txt");
+			FileReader fr = new FileReader("src/files/data/data.txt");
+			FileReader fr2 = new FileReader("src/files/data/point.txt");
 
 			BufferedReader read = new BufferedReader(fr);
 			BufferedReader read2 = new BufferedReader(fr2);
@@ -135,9 +135,9 @@ public class MainControlPanel extends JPanel implements Runnable {
 
 	public void saveGame() {
 		try {
-			FileWriter fw = new FileWriter("src/data/data.txt");
-			FileWriter fw2 = new FileWriter("src/data/highScore.txt", true);
-			FileWriter fw3 = new FileWriter("src/data/point.txt");
+			FileWriter fw = new FileWriter("src/files/data/data.txt");
+			FileWriter fw2 = new FileWriter("src/files/data/highScore.txt", true);
+			FileWriter fw3 = new FileWriter("src/files/data/point.txt");
 
 			BufferedWriter write = new BufferedWriter(fw);
 			BufferedWriter writeHighScore = new BufferedWriter(fw2);
@@ -169,7 +169,7 @@ public class MainControlPanel extends JPanel implements Runnable {
 
 	public void drawBackground(Graphics g) {// vẽ ảnh nền
 		try {
-			img = ImageIO.read(new File("src/images/forest.jpg"));
+			img = ImageIO.read(new File("src/files/images/forest.jpg"));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

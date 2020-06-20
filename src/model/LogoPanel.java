@@ -18,7 +18,7 @@ public class LogoPanel extends JPanel {
 	@Override
 	public void paint(Graphics g) {
 		try {
-			logo = ImageIO.read(new File("src/images/Fruitlogo.png"));
+			logo = ImageIO.read(new File("src/files/images/Fruitlogo.png"));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -25,37 +25,37 @@ public class Fruit {
 		int index = rd.nextInt(28);
 
 		try {
-			img1 = ImageIO.read(new File("src/images/apple.png"));
+			img1 = ImageIO.read(new File("src/files/images/apple.png"));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		try {
-			img2 = ImageIO.read(new File("src/images/watermelon.png"));
+			img2 = ImageIO.read(new File("src/files/images/watermelon.png"));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		try {
-			img3 = ImageIO.read(new File("src/images/banana.png"));
+			img3 = ImageIO.read(new File("src/files/images/banana.png"));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		try {
-			img4 = ImageIO.read(new File("src/images/ichigo.png"));
+			img4 = ImageIO.read(new File("src/files/images/ichigo.png"));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		try {
-			img5 = ImageIO.read(new File("src/images/orange.png"));
+			img5 = ImageIO.read(new File("src/files/images/orange.png"));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		try {
-			slowFruit = ImageIO.read(new File("src/images/slowDown.png"));
+			slowFruit = ImageIO.read(new File("src/files/images/slowDown.png"));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
