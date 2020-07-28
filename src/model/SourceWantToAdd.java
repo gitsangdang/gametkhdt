@@ -7,7 +7,7 @@ public class SourceWantToAdd implements Subject {
 	ArrayList<Observer> list = new ArrayList<>();
 	public String content;
 	JButton button;
-
+ 
 	public SourceWantToAdd(String content) {
 		this.content = content;
 		button = new JButton("GGGG");

@@ -145,7 +145,7 @@ public class FruitsControlThread implements Runnable {
 		this.speed -= 30;
 	}
 
-	//kiem tra va cham
+	// kiem tra va cham
 	public boolean checkCollision() {
 		for (int i = 0; i < 6; i++) {
 

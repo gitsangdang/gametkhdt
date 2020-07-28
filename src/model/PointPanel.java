@@ -8,6 +8,10 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 public class PointPanel extends JPanel implements Observer {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	public static JLabel point = new JLabel("ĐIỂM SỐ CỦA BẠN LÀ:");
 	public static JLabel miss = new JLabel("BẠN LÀM RỚT:");
 

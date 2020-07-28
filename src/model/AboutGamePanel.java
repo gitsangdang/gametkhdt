@@ -14,6 +14,10 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 public class AboutGamePanel extends JPanel {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	JLabel[] aboutGame;
 	JLabel[] memberInformation;
 	Image arrowKey;
@@ -37,7 +41,7 @@ public class AboutGamePanel extends JPanel {
 		backGround.add(arrowKeyLabel);
 		add(backGround);
 		aboutGame = new JLabel[4];
-		memberInformation = new JLabel[4];
+		memberInformation = new JLabel[6];
 		setLayout(null);
 		aboutGame[0] = new JLabel(
 				"Trò chơi hứng trái cây là một trò chơi kinh điển được rất nhiều người yêu thích trên thế ");
@@ -57,6 +61,8 @@ public class AboutGamePanel extends JPanel {
 		memberInformation[1] = new JLabel("1.16130543-Đặng Thanh Sang");
 		memberInformation[2] = new JLabel("2.16130579- Phạm Bùi Tuấn Thành");
 		memberInformation[3] = new JLabel("3.15130024-Trần Văn Đăng");
+		memberInformation[4] = new JLabel("4.16130380-Nguyễn Trung Hiếu");
+		memberInformation[5] = new JLabel("5.18130093-Võ Hồ Diễm Hương");
 		for (int i = 0; i < memberInformation.length; i++) {
 			memberInformation[i].setFont(new Font("Serif", Font.ROMAN_BASELINE, 20));
 			memberInformation[i].setSize(800, 50);

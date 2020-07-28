@@ -26,5 +26,4 @@ public class HardMode extends JFrame {
 		setVisible(true);
 
 	}
-
 }

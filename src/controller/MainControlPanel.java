@@ -23,6 +23,7 @@ import model.Fruit;
 import model.FruitCatcher;
 import view.Frame;
 
+@SuppressWarnings("serial")
 public class MainControlPanel extends JPanel implements Runnable {
 	public static FruitCatcher container;
 	Thread thread;

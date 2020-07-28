@@ -8,11 +8,15 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 
 public class GameMode extends JFrame {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	public JButton btn[] = new JButton[2];
 	String content[] = { "Chơi Bằng Chuột", "Chơi Bằng Phím" };
 
 	public GameMode() {
-		setTitle("Chọn Chế Độ Điều Khiển");
+		setTitle("Chọn Chế Độ Điều Khiển"); 
 		setLocation(0, 500);
 		setLayout(new FlowLayout());
 		for (int i = 0; i < btn.length; i++) {
