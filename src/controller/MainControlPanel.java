@@ -156,7 +156,6 @@ public class MainControlPanel extends JPanel implements Runnable {
 			writeHighScore.close();
 
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		System.exit(0);
@@ -166,7 +165,6 @@ public class MainControlPanel extends JPanel implements Runnable {
 		try {
 			img = ImageIO.read(new File("files/images/forest.jpg"));
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		g.drawImage(img, 0, 0, null);

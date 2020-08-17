@@ -9,6 +9,7 @@ import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
 public class LogoPanel extends JPanel {
+	private static final long serialVersionUID = 1L;
 	Image logo;
 
 	public LogoPanel() {
@@ -20,7 +21,6 @@ public class LogoPanel extends JPanel {
 		try {
 			logo = ImageIO.read(new File("files/images/Fruitlogo.png"));
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		g.drawImage(logo, 0, 0, 200, 200, null);

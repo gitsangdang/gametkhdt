@@ -29,7 +29,6 @@ import model.HardMode;
 import model.PointPanel;
 import model.ConTrolVolumeThread;
 
-import model.TimePanel;
 import model.LogoPanel;
 import model.GameMode;
 
@@ -48,7 +47,6 @@ public class Frame extends JFrame {
 	JButton frameButton[] = new JButton[7];
 	JButton saveGame, continueGame;
 	boolean isContinue = false;
-	public static TimePanel timePanel = new TimePanel();
 	String str[];
 	int highScorePoint;
 	boolean isPlayByKey;
@@ -86,10 +84,8 @@ public class Frame extends JFrame {
 		soundThread.setVisible(false);
 
 		setLayout(null);
-		// OBSERVER PATTERN
 
 		framePoint = new PointPanel();
-		add(timePanel);
 		aboutGame = new AboutGamePanel();
 		aboutGame.setLocation(0, 0);
 		aboutGame.setSize(800, 800);
@@ -102,7 +98,6 @@ public class Frame extends JFrame {
 		backGround.setSize(800, 800);
 		backGround.setLocation(0, 0);
 		add(backGround);
-		timePanel.setVisible(false);
 
 		framePoint.setSize(750, 70);
 		framePoint.setLocation(10, 10);
@@ -368,7 +363,6 @@ public class Frame extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if (isContinue == false) {
-					timePanel.setVisible(true);
 					backGround.setVisible(false);
 					frameLogo.setVisible(false);
 					framePoint.setVisible(true);
@@ -385,7 +379,6 @@ public class Frame extends JFrame {
 					}
 
 				} else {
-					timePanel.setVisible(true);
 					backGround.setVisible(false);
 					frameLogo.setVisible(false);
 					framePoint.setVisible(true);
@@ -407,13 +400,11 @@ public class Frame extends JFrame {
 
 						@Override
 						public void keyTyped(KeyEvent e) {
-							// TODO Auto-generated method stub
 
 						}
 
 						@Override
 						public void keyReleased(KeyEvent e) {
-							// TODO Auto-generated method stub
 
 						}
 
