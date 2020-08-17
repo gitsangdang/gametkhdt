@@ -2,14 +2,11 @@ package model;
 
 import java.awt.Image;
 import java.io.File;
-import java.io.IOException;
 import java.util.Random;
 
 import javax.imageio.ImageIO;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
-import javax.sound.sampled.LineUnavailableException;
-import javax.sound.sampled.UnsupportedAudioFileException;
 
 import controller.MainControlPanel;
 
@@ -36,25 +33,12 @@ public class FruitsControlThread implements Runnable {
 		try {
 			goalSound = AudioSystem.getClip();
 			goalSound.open(AudioSystem.getAudioInputStream(new File("files/musics/point.wav")));
-
-		} catch (LineUnavailableException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (UnsupportedAudioFileException e) {
-			// TODO Auto-generated catch block
+			explosionImg = ImageIO.read(new File("files/images/explosionicon.png"));
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		thread = new Thread(this);
 		this.fruit = fruit;
-		try {
-			explosionImg = ImageIO.read(new File("files/images/explosionicon.png"));
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 		delay = 30;
 	}
 
@@ -126,9 +110,8 @@ public class FruitsControlThread implements Runnable {
 			}
 
 			try {
-				thread.sleep(speed);
+				Thread.sleep(speed);
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
@@ -136,22 +119,21 @@ public class FruitsControlThread implements Runnable {
 	}
 
 	public void decreaseSpeed() {
-		this.speed += 30;
+		FruitsControlThread.speed += 30;
 
 		isSpeedDown = true;
 	}
 
 	public void increaseSpeed() {
-		this.speed -= 30;
+		FruitsControlThread.speed -= 30;
 	}
 
 	// kiem tra va cham
 	public boolean checkCollision() {
 		for (int i = 0; i < 6; i++) {
 
-			if ((fruit.y[2] == MainControlPanel.container.y[i] || fruit.y[3] == MainControlPanel.container.y[i])
-					&& (fruit.x[2] == MainControlPanel.container.x[i]
-							|| fruit.x[3] == MainControlPanel.container.x[i])) {
+			if ((fruit.y[2] == FruitCatcher.y[i] || fruit.y[3] == FruitCatcher.y[i])
+					&& (fruit.x[2] == FruitCatcher.x[i] || fruit.x[3] == FruitCatcher.x[i])) {
 				if (goalSound.isOpen()) {
 					goalSound.setFramePosition(0);
 				}

@@ -7,8 +7,6 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
-import controller.MainControlPanel;
-
 public class FruitCatcher {
 	public static int x[] = new int[6];
 	public static int y[] = new int[6];
@@ -20,7 +18,6 @@ public class FruitCatcher {
 		try {
 			img = ImageIO.read(new File("files/images/girlcatch.png"));
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
@@ -54,7 +51,7 @@ public class FruitCatcher {
 		}
 	}
 
-	public void setViTriByMouse(int xMouse) {
+	public void setLocationByMouse(int xMouse) {
 		if (xMouse > (21 * 2) && xMouse < (21 * 27)) {
 			for (int i = 0; i < x.length; i++) {
 				x[i] = ((xMouse / 21) - 2 + i);

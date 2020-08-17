@@ -14,9 +14,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 public class AboutGamePanel extends JPanel {
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	JLabel[] aboutGame;
 	JLabel[] memberInformation;
@@ -29,7 +26,6 @@ public class AboutGamePanel extends JPanel {
 			arrowKey = ImageIO.read(new File("files/images/arrowkey.png"));
 
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		JLabel arrowKeyLabel = new JLabel(new ImageIcon(arrowKey));

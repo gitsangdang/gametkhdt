@@ -28,13 +28,13 @@ import model.FruitsControlThread;
 import model.HardMode;
 import model.PointPanel;
 import model.ConTrolVolumeThread;
-import model.SourceWantToAdd;
 
 import model.TimePanel;
 import model.LogoPanel;
 import model.GameMode;
 
 public class Frame extends JFrame {
+	private static final long serialVersionUID = 1L;
 	MainControlPanel frameControl;
 	public static PointPanel framePoint;
 	AboutGamePanel aboutGame;
@@ -52,7 +52,6 @@ public class Frame extends JFrame {
 	String str[];
 	int highScorePoint;
 	boolean isPlayByKey;
-	public static SourceWantToAdd source;
 	Clip buttonClip, soundClip;
 	FloatControl controlSound, controlButton;
 	ConTrolVolumeThread soundThread;
@@ -90,11 +89,7 @@ public class Frame extends JFrame {
 		// OBSERVER PATTERN
 
 		framePoint = new PointPanel();
-		source = new SourceWantToAdd(time);
-		source.addObserver(framePoint);
-		source.addObserver(timePanel);
 		add(timePanel);
-		source.notifys();
 		aboutGame = new AboutGamePanel();
 		aboutGame.setLocation(0, 0);
 		aboutGame.setSize(800, 800);
@@ -109,7 +104,7 @@ public class Frame extends JFrame {
 		add(backGround);
 		timePanel.setVisible(false);
 
-		framePoint.setSize(630, 70);
+		framePoint.setSize(750, 70);
 		framePoint.setLocation(10, 10);
 
 		frameLogo = new LogoPanel();
@@ -117,7 +112,7 @@ public class Frame extends JFrame {
 		frameLogo.setLocation(300, 50);
 		backGround.add(frameLogo);
 		frameControl.setLocation(10, 90);
-		frameControl.setSize(630, 630);
+		frameControl.setSize(800, 800);
 		saveGame = new JButton("Save Game Và Thoát");
 		saveGame.setLocation(600, 20);
 		saveGame.setSize(80, 30);
@@ -135,6 +130,7 @@ public class Frame extends JFrame {
 		backGround.add(highScore);
 		try {
 			FileReader readHighScore = new FileReader("files/data/highScore.txt");
+			@SuppressWarnings("resource")
 			BufferedReader readFile = new BufferedReader(readHighScore);
 			String tam = readFile.readLine();
 			if (tam != null) {
@@ -148,7 +144,6 @@ public class Frame extends JFrame {
 				highScore.setText("Số Điểm Cao Nhất:" + highScorePoint);
 			}
 		} catch (Exception e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 
@@ -425,17 +420,17 @@ public class Frame extends JFrame {
 						@Override
 						public void keyPressed(KeyEvent e) {
 							if (e.getKeyCode() == KeyEvent.VK_LEFT) {
-								frameControl.container.setLocation(-1);
+								MainControlPanel.container.setLocation(-1);
 
 							}
 
 							if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
-								frameControl.container.setLocation(1);
+								MainControlPanel.container.setLocation(1);
 
 							}
 							if (e.getKeyCode() == KeyEvent.VK_SPACE) {
 								FruitsControlThread.isStart = !FruitsControlThread.isStart;
-								frameControl.container.isStart = !frameControl.container.isStart;
+								MainControlPanel.container.isStart = !MainControlPanel.container.isStart;
 								frameControl.isPause = !frameControl.isPause;
 							}
 						}
@@ -444,7 +439,7 @@ public class Frame extends JFrame {
 					MouseAdapter mouse = new MouseAdapter() {
 						@Override
 						public void mouseMoved(MouseEvent e) {
-							frameControl.container.setViTriByMouse(e.getX());
+							MainControlPanel.container.setLocationByMouse(e.getX());
 						}
 
 					};

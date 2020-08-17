@@ -8,6 +8,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 
 public class HardMode extends JFrame {
+	private static final long serialVersionUID = 1L;
 	public JButton btn[] = new JButton[3];
 	public String contentBtn[] = { "DỄ", "TRUNG BÌNH", "KHÓ" };
 

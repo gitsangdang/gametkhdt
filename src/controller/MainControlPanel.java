@@ -7,7 +7,6 @@ import java.awt.Image;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -23,8 +22,8 @@ import model.Fruit;
 import model.FruitCatcher;
 import view.Frame;
 
-@SuppressWarnings("serial")
 public class MainControlPanel extends JPanel implements Runnable {
+	private static final long serialVersionUID = 1L;
 	public static FruitCatcher container;
 	Thread thread;
 	public FruitsControlThread threadFruit[] = new FruitsControlThread[6];
@@ -43,7 +42,6 @@ public class MainControlPanel extends JPanel implements Runnable {
 	public boolean isPause = false;
 	public static int second = 0;
 
-	Fruit saveFruit1, saveFruit2, saveFruit3, saveFruit4, saveFruit5;
 	String[] highPoint;
 
 	public MainControlPanel() {
@@ -82,8 +80,8 @@ public class MainControlPanel extends JPanel implements Runnable {
 		// khi kiemtravacham là true thì hiện ra vụ nổ
 		for (int i = 0; i < threadFruit.length; i++) {
 			if (threadFruit[i].isExplosion) {
-				g.drawImage(threadFruit[0].explosionImg, (container.x[3] - 1) * 21, (container.y[3] - 3) * 21, 80, 80,
-						null);
+				g.drawImage(threadFruit[0].explosionImg, (FruitCatcher.x[3] - 1) * 21, (FruitCatcher.y[3] - 3) * 21, 80,
+						80, null);
 			}
 
 		}
@@ -125,11 +123,7 @@ public class MainControlPanel extends JPanel implements Runnable {
 			read2.close();
 			point = Integer.parseInt(str[0]);
 			miss = Integer.parseInt(str[1]);
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
@@ -202,19 +196,11 @@ public class MainControlPanel extends JPanel implements Runnable {
 				if (check == 0) {
 					for (int i = 0; i < threadFruit.length; i++) {
 						threadFruit[i].setDelay(1 + i * 10);
-						for (int j = 0; j < 4; j++) {
+						for (int j = 0; j < 6; j++) {
 							int index2 = rd.nextInt(28);
-
 							// trái cây xuất hiện random tại một x ngẫu nhiên và y =0
-							threadFruit[i].fruit.x[0] = index2;
-							threadFruit[i].fruit.x[1] = index2 + 1;
-							threadFruit[i].fruit.x[2] = index2;
-							threadFruit[i].fruit.x[3] = index2 + 1;
-							threadFruit[i].fruit.y[0] = -3;
-							threadFruit[i].fruit.y[1] = -3;
-							threadFruit[i].fruit.y[2] = -2;
-							threadFruit[i].fruit.y[3] = -2;
-
+							threadFruit[i].fruit.x[j] = index2;
+							threadFruit[i].fruit.y[j] = -3;
 						}
 					}
 					miss = 0;

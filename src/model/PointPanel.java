@@ -3,14 +3,10 @@ package model;
 import java.awt.Font;
 import java.awt.GridLayout;
 
-import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-public class PointPanel extends JPanel implements Observer {
-	/**
-	 * 
-	 */
+public class PointPanel extends JPanel {
 	private static final long serialVersionUID = 1L;
 	public static JLabel point = new JLabel("ĐIỂM SỐ CỦA BẠN LÀ:");
 	public static JLabel miss = new JLabel("BẠN LÀM RỚT:");
@@ -31,9 +27,4 @@ public class PointPanel extends JPanel implements Observer {
 		add(label);
 	}
 
-	@Override
-	public void addNew(JButton btn) {
-		this.add(btn);
-
-	}
 }

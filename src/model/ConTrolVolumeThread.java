@@ -2,15 +2,12 @@ package model;
 
 import java.awt.Font;
 import java.io.File;
-import java.io.IOException;
 import java.util.Hashtable;
 
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.sound.sampled.FloatControl;
-import javax.sound.sampled.LineUnavailableException;
-import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -20,7 +17,7 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 public class ConTrolVolumeThread extends JPanel implements Runnable {
-	Thread thread;
+	private static final long serialVersionUID = 1L;
 	public FloatControl controlSound, controlButton;
 	public Clip buttonClip, soundClip;
 	public ConTrolVolumeThread soundThread;
@@ -28,41 +25,23 @@ public class ConTrolVolumeThread extends JPanel implements Runnable {
 	public JButton back;
 
 	public ConTrolVolumeThread() {
-		thread = new Thread(this);
+		new Thread(this);
 		try {
 			AudioInputStream audio = AudioSystem.getAudioInputStream(new File("files/musics/music.wav"));
 			soundClip = AudioSystem.getClip();
 			soundClip.open(audio);
-			soundClip.loop(soundClip.LOOP_CONTINUOUSLY);
+			soundClip.loop(Clip.LOOP_CONTINUOUSLY);
 			controlSound = (FloatControl) soundClip.getControl(FloatControl.Type.MASTER_GAIN);
 			controlSound.setValue(0);
 			soundClip.start();
 
-		} catch (UnsupportedAudioFileException e2) {
-			// TODO Auto-generated catch block
-			e2.printStackTrace();
-		} catch (IOException e2) {
-			// TODO Auto-generated catch block
-			e2.printStackTrace();
-		} catch (LineUnavailableException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-		try {
 			buttonClip = AudioSystem.getClip();
 			buttonClip.open(AudioSystem.getAudioInputStream(new File("files/musics/button2.wav")));
 			controlButton = (FloatControl) buttonClip.getControl(FloatControl.Type.MASTER_GAIN);
 			controlButton.setValue(0);
 
-		} catch (LineUnavailableException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		} catch (IOException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		} catch (UnsupportedAudioFileException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 		setLayout(null);
 		JLabel label = new JLabel("Điều Chỉnh Âm Thanh Nhạc Nền:");
@@ -89,7 +68,6 @@ public class ConTrolVolumeThread extends JPanel implements Runnable {
 			@Override
 			public void stateChanged(ChangeEvent e) {
 				int i = ((JSlider) e.getSource()).getValue();
-				System.out.println(i);
 				controlSound.setValue(i);
 			}
 		});
@@ -103,7 +81,6 @@ public class ConTrolVolumeThread extends JPanel implements Runnable {
 			@Override
 			public void stateChanged(ChangeEvent e) {
 				int i = ((JSlider) e.getSource()).getValue();
-				System.out.println(i);
 				controlButton.setValue(i);
 			}
 		});
