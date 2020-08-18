@@ -22,8 +22,6 @@ import javax.swing.JOptionPane;
 import javax.swing.border.BevelBorder;
 
 import controller.MainControlPanel;
-import model.AboutGamePanel;
-import model.ControlVolume;
 import model.FruitsControlThread;
 import model.HardMode;
 import model.PointPanel;
@@ -53,7 +51,6 @@ public class Frame extends JFrame {
 	Clip buttonClip, soundClip;
 	FloatControl controlSound, controlButton;
 	ConTrolVolumeThread soundThread;
-	ControlVolume controlVolume;
 
 	public Frame() {
 		MouseAdapter mouseHover = new MouseAdapter() {
