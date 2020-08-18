@@ -99,7 +99,7 @@ public class Frame extends JFrame {
 		backGround.setLocation(0, 0);
 		add(backGround);
 
-		framePoint.setSize(750, 70);
+		framePoint.setSize(780, 70);
 		framePoint.setLocation(10, 10);
 
 		frameLogo = new LogoPanel();
@@ -119,9 +119,10 @@ public class Frame extends JFrame {
 		framePoint.add(saveGame);
 
 		JLabel highScore = new JLabel();
-		highScore.setLocation(600, 50);
+		highScore.setLocation(550, 50);
 		highScore.setSize(200, 30);
-		highScore.setFont(new Font("Serif", Font.ITALIC, 20));
+		highScore.setForeground(Color.WHITE);
+		highScore.setFont(new Font("Serif", Font.BOLD, 20));
 		backGround.add(highScore);
 		try {
 			FileReader readHighScore = new FileReader("files/data/highScore.txt");
@@ -223,8 +224,64 @@ public class Frame extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				frameControl.continueGame();
+				backGround.setVisible(false);
+				frameLogo.setVisible(false);
+				framePoint.setVisible(true);
+				beginTime = System.currentTimeMillis();
+				endTime = System.currentTimeMillis() + 120000;
+				frameControl.setVisible(true);
+				frameControl.setFocusable(true);
+				frameControl.requestFocusInWindow();
 
+				for (int i = 0; i < frameControl.threadFruit.length; i++) {
+					frameControl.threadFruit[i].setDelay(1 + i * 10);
+					frameControl.threadFruit[i].thread.start();
+
+				}
+				
+				if (isPlayByKey) {
+					addKeyListener(new KeyListener() {
+
+						@Override
+						public void keyTyped(KeyEvent e) {
+
+						}
+
+						@Override
+						public void keyReleased(KeyEvent e) {
+
+						}
+
+						@Override
+						public void keyPressed(KeyEvent e) {
+							if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+								MainControlPanel.container.setLocation(-1);
+
+							}
+
+							if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+								MainControlPanel.container.setLocation(1);
+
+							}
+							if (e.getKeyCode() == KeyEvent.VK_SPACE) {
+								FruitsControlThread.isStart = !FruitsControlThread.isStart;
+								MainControlPanel.container.isStart = !MainControlPanel.container.isStart;
+								frameControl.isPause = !frameControl.isPause;
+							}
+						}
+					});
+				} else {
+					MouseAdapter mouse = new MouseAdapter() {
+						@Override
+						public void mouseMoved(MouseEvent e) {
+							MainControlPanel.container.setLocationByMouse(e.getX());
+						}
+
+					};
+					addMouseListener(mouse);
+					addMouseMotionListener(mouse);
+				}
+				frameControl.continueGame();
 			}
 		});
 
@@ -280,7 +337,7 @@ public class Frame extends JFrame {
 		frameButton[6] = new JButton();
 		frameButton[6].setIcon(new ImageIcon("files/images/exitbutton.png"));
 		frameButton[6].setSize(200, 50);
-		frameButton[6].setLocation(300, 700);
+		frameButton[6].setLocation(300, 650);
 		frameButton[6].setBorder(BorderFactory.createEmptyBorder());
 		frameButton[6].setContentAreaFilled(false);
 		backGround.add(frameButton[6]);
