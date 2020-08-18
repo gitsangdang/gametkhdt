@@ -3,14 +3,6 @@ package model;
 import java.awt.Graphics;
 import java.util.Random;
 
-import model.DecoratorFruit.Apple;
-import model.DecoratorFruit.Banana;
-import model.DecoratorFruit.FruitDecorator;
-import model.DecoratorFruit.Mango;
-import model.DecoratorFruit.Orange;
-import model.DecoratorFruit.Strawberry;
-import model.DecoratorFruit.Watermelon;
-
 public class Fruit {
 	public int x[] = new int[6];
 	public int y[] = new int[6];

@@ -1,22 +1,22 @@
-package model.DecoratorFruit;
+package model;
 
 import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
-public class Banana extends FruitDecorator {
+public class Strawberry extends FruitDecorator {
 
-	public Banana() {
+	public Strawberry() {
 		super();
-		name = "BANANA";
-		path = "files/fruit/banana.png";
+		name = "APPLE";
+		path = "files/fruit/ichigo.png";
 		try {
 			file = ImageIO.read(new File(path));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		imagesNum = 2;
+		imagesNum = 4;
 	}
 
 }

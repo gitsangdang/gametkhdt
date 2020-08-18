@@ -1,4 +1,4 @@
-package model.DecoratorFruit;
+package model;
 
 import java.awt.Image;
 
