@@ -8,9 +8,6 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 
 public class GameMode extends JFrame {
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	public JButton btn[] = new JButton[2];
 	String content[] = { "Chơi Bằng Chuột", "Chơi Bằng Phím" };
