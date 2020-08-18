@@ -17,10 +17,10 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import model.FruitsControlThread;
-import model.PointPanel;
 import model.Fruit;
 import model.FruitCatcher;
 import view.Frame;
+import view.PointPanel;
 
 public class MainControlPanel extends JPanel implements Runnable {
 	private static final long serialVersionUID = 1L;

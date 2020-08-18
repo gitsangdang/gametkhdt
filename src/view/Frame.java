@@ -23,12 +23,7 @@ import javax.swing.border.BevelBorder;
 
 import controller.MainControlPanel;
 import model.FruitsControlThread;
-import model.HardMode;
-import model.PointPanel;
 import model.ConTrolVolumeThread;
-
-import model.LogoPanel;
-import model.GameMode;
 
 public class Frame extends JFrame {
 	private static final long serialVersionUID = 1L;
