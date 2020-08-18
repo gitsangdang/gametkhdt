@@ -12,7 +12,6 @@ public class FruitCatcher {
 	public static int y[] = new int[6];
 	public boolean isStart = true;
 	Image img;
-	Fruit tam;
 
 	public FruitCatcher() {
 		try {
@@ -59,8 +58,7 @@ public class FruitCatcher {
 		}
 	}
 
-	public void drawContainer(Graphics g) {
+	public void drawFruitCatcher(Graphics g) {
 		g.drawImage(img, x[0] * 21, y[0] * 21, 21 * 6, 21 * 4, null);
-
 	}
 }

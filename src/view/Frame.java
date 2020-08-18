@@ -19,17 +19,18 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.border.BevelBorder;
 
+import controller.FruitsControlThread;
 import controller.MainControlPanel;
-import model.FruitsControlThread;
-import model.ConTrolVolumeThread;
+import observer.PointPanelDisplay;
+import observer.RemainingPanelDisplay;
+import observer.TotalPanelDisplay;
 
 public class Frame extends JFrame {
 	private static final long serialVersionUID = 1L;
-	MainControlPanel frameControl;
-	public static PointPanel framePoint;
-	AboutGamePanel aboutGame;
+	public static JPanel frameTop;
 	GameMode gameMode;
 	public static String time = "";
 	public static long beginTime;
@@ -38,14 +39,14 @@ public class Frame extends JFrame {
 	public static long endTime;
 	HardMode hardMode;
 	JButton frameButton[] = new JButton[7];
-	JButton saveGame, continueGame;
+
 	boolean isContinue = false;
 	String str[];
 	int highScorePoint;
 	boolean isPlayByKey;
 	Clip buttonClip, soundClip;
 	FloatControl controlSound, controlButton;
-	ConTrolVolumeThread soundThread;
+	ConTrolVolume soundThread;
 
 	public Frame() {
 		MouseAdapter mouseHover = new MouseAdapter() {
@@ -71,19 +72,18 @@ public class Frame extends JFrame {
 		};
 		// âm thanh(phai la file wav thuan khong ep kieu moi hoat dong)
 
-		soundThread = new ConTrolVolumeThread();
+		soundThread = new ConTrolVolume();
 		add(soundThread);
 		soundThread.setVisible(false);
 
 		setLayout(null);
 
-		framePoint = new PointPanel();
-		aboutGame = new AboutGamePanel();
+		AboutGamePanel aboutGame = new AboutGamePanel();
 		aboutGame.setLocation(0, 0);
 		aboutGame.setSize(800, 800);
 		aboutGame.setVisible(false);
 		add(aboutGame);
-		frameControl = new MainControlPanel();
+		MainControlPanel frameControl = new MainControlPanel();
 		frameControl.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));
 
 		JLabel backGround = new JLabel(new ImageIcon("files/images/backGround.jpg"));
@@ -91,8 +91,24 @@ public class Frame extends JFrame {
 		backGround.setLocation(0, 0);
 		add(backGround);
 
-		framePoint.setSize(780, 70);
-		framePoint.setLocation(10, 10);
+		frameTop = new JPanel();
+		frameTop.setSize(780, 70);
+		frameTop.setLocation(10, 10);
+
+		JLabel framePoint = new PointPanelDisplay().display();
+		framePoint.setSize(0, 0);
+		framePoint.setLocation(10, 20);
+		frameTop.add(framePoint);
+
+		JLabel frameRemaining = new RemainingPanelDisplay().display();
+		frameRemaining.setSize(0, 0);
+		frameRemaining.setLocation(0, 0);
+		frameTop.add(frameRemaining);
+
+		JLabel frameTotal = new TotalPanelDisplay().display();
+		frameTotal.setSize(0, 0);
+		frameTotal.setLocation(60, 20);
+		frameTop.add(frameTotal);
 
 		frameLogo = new LogoPanel();
 		frameLogo.setSize(200, 200);
@@ -100,15 +116,15 @@ public class Frame extends JFrame {
 		backGround.add(frameLogo);
 		frameControl.setLocation(10, 90);
 		frameControl.setSize(800, 800);
-		saveGame = new JButton("Save Game Và Thoát");
-		saveGame.setLocation(600, 20);
-		saveGame.setSize(80, 30);
-		saveGame.setBorder(BorderFactory.createEmptyBorder());
 
+		JButton saveGame = new JButton("Save Game Và Thoát");
+		saveGame.setLocation(100, 0);
+		saveGame.setSize(800, 30);
+		saveGame.setBorder(BorderFactory.createEmptyBorder());
 		saveGame.setFont(new Font("Serif", Font.ITALIC, 25));
 		saveGame.setContentAreaFilled(false);
 		saveGame.setForeground(Color.red);
-		framePoint.add(saveGame);
+		frameTop.add(saveGame);
 
 		JLabel highScore = new JLabel();
 		highScore.setLocation(550, 50);
@@ -218,7 +234,7 @@ public class Frame extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				backGround.setVisible(false);
 				frameLogo.setVisible(false);
-				framePoint.setVisible(true);
+				frameTop.setVisible(true);
 				beginTime = System.currentTimeMillis();
 				endTime = System.currentTimeMillis() + 120000;
 				frameControl.setVisible(true);
@@ -230,7 +246,7 @@ public class Frame extends JFrame {
 					frameControl.threadFruit[i].thread.start();
 
 				}
-				
+
 				if (isPlayByKey) {
 					addKeyListener(new KeyListener() {
 
@@ -247,17 +263,17 @@ public class Frame extends JFrame {
 						@Override
 						public void keyPressed(KeyEvent e) {
 							if (e.getKeyCode() == KeyEvent.VK_LEFT) {
-								MainControlPanel.container.setLocation(-1);
+								MainControlPanel.fruitCatcher.setLocation(-1);
 
 							}
 
 							if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
-								MainControlPanel.container.setLocation(1);
+								MainControlPanel.fruitCatcher.setLocation(1);
 
 							}
 							if (e.getKeyCode() == KeyEvent.VK_SPACE) {
 								FruitsControlThread.isStart = !FruitsControlThread.isStart;
-								MainControlPanel.container.isStart = !MainControlPanel.container.isStart;
+								MainControlPanel.fruitCatcher.isStart = !MainControlPanel.fruitCatcher.isStart;
 								frameControl.isPause = !frameControl.isPause;
 							}
 						}
@@ -266,7 +282,7 @@ public class Frame extends JFrame {
 					MouseAdapter mouse = new MouseAdapter() {
 						@Override
 						public void mouseMoved(MouseEvent e) {
-							MainControlPanel.container.setLocationByMouse(e.getX());
+							MainControlPanel.fruitCatcher.setLocationByMouse(e.getX());
 						}
 
 					};
@@ -323,7 +339,7 @@ public class Frame extends JFrame {
 			}
 		});
 
-		add(framePoint);
+		add(frameTop);
 
 		// nút exit nằm ở vị trí đặc biệt
 		frameButton[6] = new JButton();
@@ -350,9 +366,9 @@ public class Frame extends JFrame {
 
 		add(frameControl);
 		frameControl.setVisible(false);
-		framePoint.setVisible(false);
-		framePoint.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-		framePoint.setBackground(Color.green);
+		frameTop.setVisible(false);
+		frameTop.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+		frameTop.setBackground(Color.green);
 
 		// sự kiện cho độ khó
 		ActionListener action = new ActionListener() {
@@ -414,7 +430,7 @@ public class Frame extends JFrame {
 				if (isContinue == false) {
 					backGround.setVisible(false);
 					frameLogo.setVisible(false);
-					framePoint.setVisible(true);
+					frameTop.setVisible(true);
 					beginTime = System.currentTimeMillis();
 					endTime = System.currentTimeMillis() + 120000;
 					frameControl.setVisible(true);
@@ -430,7 +446,7 @@ public class Frame extends JFrame {
 				} else {
 					backGround.setVisible(false);
 					frameLogo.setVisible(false);
-					framePoint.setVisible(true);
+					frameTop.setVisible(true);
 					beginTime = System.currentTimeMillis();
 					endTime = System.currentTimeMillis() + 120000;
 					frameControl.setVisible(true);
@@ -460,17 +476,17 @@ public class Frame extends JFrame {
 						@Override
 						public void keyPressed(KeyEvent e) {
 							if (e.getKeyCode() == KeyEvent.VK_LEFT) {
-								MainControlPanel.container.setLocation(-1);
+								MainControlPanel.fruitCatcher.setLocation(-1);
 
 							}
 
 							if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
-								MainControlPanel.container.setLocation(1);
+								MainControlPanel.fruitCatcher.setLocation(1);
 
 							}
 							if (e.getKeyCode() == KeyEvent.VK_SPACE) {
 								FruitsControlThread.isStart = !FruitsControlThread.isStart;
-								MainControlPanel.container.isStart = !MainControlPanel.container.isStart;
+								MainControlPanel.fruitCatcher.isStart = !MainControlPanel.fruitCatcher.isStart;
 								frameControl.isPause = !frameControl.isPause;
 							}
 						}
@@ -479,7 +495,7 @@ public class Frame extends JFrame {
 					MouseAdapter mouse = new MouseAdapter() {
 						@Override
 						public void mouseMoved(MouseEvent e) {
-							MainControlPanel.container.setLocationByMouse(e.getX());
+							MainControlPanel.fruitCatcher.setLocationByMouse(e.getX());
 						}
 
 					};

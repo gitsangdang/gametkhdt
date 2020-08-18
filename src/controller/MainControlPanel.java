@@ -16,40 +16,34 @@ import javax.imageio.ImageIO;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-import model.FruitsControlThread;
 import model.Fruit;
 import model.FruitCatcher;
+import observer.RemainingPanelDisplay;
+import observer.Point;
+import observer.PointPanelDisplay;
+import observer.TotalPanelDisplay;
 import view.Frame;
-import view.PointPanel;
 
 public class MainControlPanel extends JPanel implements Runnable {
 	private static final long serialVersionUID = 1L;
-	public static FruitCatcher container;
+	public static FruitCatcher fruitCatcher;
 	Thread thread;
 	public FruitsControlThread threadFruit[] = new FruitsControlThread[6];
-
 	public static Fruit fruit[] = new Fruit[6];
-
-	Random rd = new Random();
-	int index;
 	public static int point = 0;
 	public static int miss = 0;
-	Image img;
-	String[] str;
 	long time = 0;
 
 	public static int minute = 0;
 	public boolean isPause = false;
 	public static int second = 0;
 
-	String[] highPoint;
-
 	public MainControlPanel() {
 
 		for (int i = 0; i < fruit.length; i++) {
 			fruit[i] = new Fruit();
 		}
-		container = new FruitCatcher();
+		fruitCatcher = new FruitCatcher();
 
 		thread = new Thread(this);
 
@@ -62,14 +56,9 @@ public class MainControlPanel extends JPanel implements Runnable {
 
 	}
 
-	@Override
 	public void paint(Graphics g) {
-
-		super.paint(g);
-
 		drawBackground(g);// phải vẽ ảnh n�?n đầu tiên
-
-		container.drawContainer(g);
+		fruitCatcher.drawFruitCatcher(g);
 
 		for (int i = 0; i < threadFruit.length; i++) {
 
@@ -97,6 +86,7 @@ public class MainControlPanel extends JPanel implements Runnable {
 
 	public void continueGame() {
 		try {
+			String[] str;
 			FileReader fr = new FileReader("files/data/data.txt");
 			FileReader fr2 = new FileReader("files/data/point.txt");
 
@@ -161,7 +151,9 @@ public class MainControlPanel extends JPanel implements Runnable {
 		System.exit(0);
 	}
 
-	public void drawBackground(Graphics g) {// vẽ ảnh nền
+	// vẽ ảnh nền
+	public void drawBackground(Graphics g) {
+		Image img = null;
 		try {
 			img = ImageIO.read(new File("files/images/forest.jpg"));
 		} catch (IOException e) {
@@ -195,9 +187,10 @@ public class MainControlPanel extends JPanel implements Runnable {
 					for (int i = 0; i < threadFruit.length; i++) {
 						threadFruit[i].setDelay(1 + i * 10);
 						for (int j = 0; j < 6; j++) {
-							int index2 = rd.nextInt(28);
-							// trái cây xuất hiện random tại một x ngẫu nhiên và y =0
-							threadFruit[i].fruit.x[j] = index2;
+							// trái cây xuất hiện random tại một x ngẫu nhiên và y = -3
+							
+							int index = new Random().nextInt(28);
+							threadFruit[i].fruit.x[j] = index;
 							threadFruit[i].fruit.y[j] = -3;
 						}
 					}
@@ -238,10 +231,13 @@ public class MainControlPanel extends JPanel implements Runnable {
 					}
 
 				}
-
-				PointPanel.point.setText("ĐIỂM CỦA BẠN LÀ: " + point);
-				PointPanel.miss.setText("CÒN LẠI:" + (20 - miss) + " TRÁI");
-
+				
+				//Observer
+				Point p = new Point();
+				new PointPanelDisplay(p);
+				new RemainingPanelDisplay(p);
+				new TotalPanelDisplay(p);
+				p.setPoint(point, miss);
 			}
 
 		}

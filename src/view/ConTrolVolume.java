@@ -1,4 +1,4 @@
-package model;
+package view;
 
 import java.awt.Font;
 import java.io.File;
@@ -16,15 +16,15 @@ import javax.swing.JSlider;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
-public class ConTrolVolumeThread extends JPanel implements Runnable {
+public class ConTrolVolume extends JPanel implements Runnable {
 	private static final long serialVersionUID = 1L;
 	public FloatControl controlSound, controlButton;
 	public Clip buttonClip, soundClip;
-	public ConTrolVolumeThread soundThread;
+	public ConTrolVolume soundThread;
 	public JSlider slider, sliderButton;
 	public JButton back;
 
-	public ConTrolVolumeThread() {
+	public ConTrolVolume() {
 		new Thread(this);
 		try {
 			AudioInputStream audio = AudioSystem.getAudioInputStream(new File("files/musics/music.wav"));

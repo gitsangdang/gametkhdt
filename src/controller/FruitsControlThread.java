@@ -1,4 +1,4 @@
-package model;
+package controller;
 
 import java.awt.Image;
 import java.io.File;
@@ -8,13 +8,12 @@ import javax.imageio.ImageIO;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 
-import controller.MainControlPanel;
+import model.Fruit;
+import model.FruitCatcher;
 
 public class FruitsControlThread implements Runnable {
 	public Thread thread;
 	public Fruit fruit;
-	int index;// biến random
-	Random rd = new Random();
 	Clip goalSound;
 
 	public Image explosionImg;
@@ -70,19 +69,13 @@ public class FruitsControlThread implements Runnable {
 						}
 					}
 				} else {
-
-					for (int i = 0; i < 4; i++) {
-						index = rd.nextInt(28);
-
-						fruit.x[0] = index;// trái cây xuất hiện random tại một x ngẫu nhiên và y =0
-						fruit.x[1] = index + 1;
-						fruit.x[2] = index;
-						fruit.x[3] = index + 1;
-						fruit.y[0] = -3;
-						fruit.y[1] = -3;
-						fruit.y[2] = -2;
-						fruit.y[3] = -2;
-
+					// trái cây xuất hiện random tại một x ngẫu nhiên và y = -3
+					for (int i = 0; i < 6; i++) {
+						for (int j = 0; j < 6; j++) {
+							int index = new Random().nextInt(28);
+							fruit.x[i] = index;
+							fruit.y[j] = -3;
+						}
 					}
 
 				}
@@ -120,7 +113,6 @@ public class FruitsControlThread implements Runnable {
 
 	public void decreaseSpeed() {
 		FruitsControlThread.speed += 30;
-
 		isSpeedDown = true;
 	}
 
@@ -138,23 +130,16 @@ public class FruitsControlThread implements Runnable {
 					goalSound.setFramePosition(0);
 				}
 				goalSound.start();
-				index = rd.nextInt(28);
-				fruit.x[0] = index;
-				fruit.x[1] = index + 1;
-				fruit.x[2] = index;
-				fruit.x[3] = index + 1;
-				fruit.y[0] = -3;
-				fruit.y[1] = -3;
-				fruit.y[2] = -2;
-				fruit.y[3] = -2;
+				int index = new Random().nextInt(28);
+				for (int j = 0; j < 6; j++) {
+					fruit.x[j] = index;
+					fruit.y[j] = -3;
+				}
 
 				isExplosion = true;
 				return true;
-
 			}
-
 		}
-
 		return false;
 	}
 
