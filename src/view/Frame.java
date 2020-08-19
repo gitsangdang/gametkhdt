@@ -11,7 +11,6 @@ import java.awt.event.MouseEvent;
 import java.io.BufferedReader;
 import java.io.FileReader;
 
-import javax.sound.sampled.Clip;
 import javax.sound.sampled.FloatControl;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -30,21 +29,14 @@ import observer.TotalPanelDisplay;
 
 public class Frame extends JFrame {
 	private static final long serialVersionUID = 1L;
-	public static JPanel frameTop;
-	GameMode gameMode;
-	public static String time = "";
 	public static long beginTime;
-	LogoPanel frameLogo;
-	Clip clip;
 	public static long endTime;
-	HardMode hardMode;
-	JButton frameButton[] = new JButton[7];
+	private static JPanel frameTop;
+	private LogoPanel frameLogo;
+	private JButton frameButton[] = new JButton[7];
 
 	boolean isContinue = false;
-	String str[];
-	int highScorePoint;
 	boolean isPlayByKey;
-	Clip buttonClip, soundClip;
 	FloatControl controlSound, controlButton;
 	ConTrolVolume soundThread;
 
@@ -133,13 +125,14 @@ public class Frame extends JFrame {
 		highScore.setFont(new Font("Serif", Font.BOLD, 20));
 		backGround.add(highScore);
 		try {
+			String str[];
 			FileReader readHighScore = new FileReader("files/data/highScore.txt");
 			@SuppressWarnings("resource")
 			BufferedReader readFile = new BufferedReader(readHighScore);
 			String tam = readFile.readLine();
 			if (tam != null) {
 				str = tam.split(" ");
-				highScorePoint = Integer.parseInt(str[0]);
+				int highScorePoint = Integer.parseInt(str[0]);
 				for (int i = 1; i < str.length; i++) {
 					if (Integer.parseInt(str[i]) > highScorePoint) {
 						highScorePoint = Integer.parseInt(str[i]);
@@ -228,200 +221,6 @@ public class Frame extends JFrame {
 		playBy.setFont(new Font("Serif", Font.ROMAN_BASELINE, 20));
 		playBy.setForeground(Color.red);
 
-		frameButton[1].addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				backGround.setVisible(false);
-				frameLogo.setVisible(false);
-				frameTop.setVisible(true);
-				beginTime = System.currentTimeMillis();
-				endTime = System.currentTimeMillis() + 120000;
-				frameControl.setVisible(true);
-				frameControl.setFocusable(true);
-				frameControl.requestFocusInWindow();
-
-				for (int i = 0; i < frameControl.threadFruit.length; i++) {
-					frameControl.threadFruit[i].setDelay(1 + i * 10);
-					frameControl.threadFruit[i].thread.start();
-
-				}
-
-				if (isPlayByKey) {
-					addKeyListener(new KeyListener() {
-
-						@Override
-						public void keyTyped(KeyEvent e) {
-
-						}
-
-						@Override
-						public void keyReleased(KeyEvent e) {
-
-						}
-
-						@Override
-						public void keyPressed(KeyEvent e) {
-							if (e.getKeyCode() == KeyEvent.VK_LEFT) {
-								MainControlPanel.fruitCatcher.setLocation(-1);
-
-							}
-
-							if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
-								MainControlPanel.fruitCatcher.setLocation(1);
-
-							}
-							if (e.getKeyCode() == KeyEvent.VK_SPACE) {
-								FruitsControlThread.isStart = !FruitsControlThread.isStart;
-								MainControlPanel.fruitCatcher.isStart = !MainControlPanel.fruitCatcher.isStart;
-								frameControl.isPause = !frameControl.isPause;
-							}
-						}
-					});
-				} else {
-					MouseAdapter mouse = new MouseAdapter() {
-						@Override
-						public void mouseMoved(MouseEvent e) {
-							MainControlPanel.fruitCatcher.setLocationByMouse(e.getX());
-						}
-
-					};
-					addMouseListener(mouse);
-					addMouseMotionListener(mouse);
-				}
-				frameControl.continueGame();
-			}
-		});
-
-		frameButton[3].addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-
-				gameMode = new GameMode();
-				for (int i = 0; i < gameMode.btn.length; i++) {
-					gameMode.btn[i].setFont(new Font("Serif", Font.ITALIC, 25));
-					gameMode.btn[i].addMouseListener(mouseHover);
-					gameMode.btn[i].addMouseMotionListener(mouseHover);
-				}
-				gameMode.btn[0].addActionListener(new ActionListener() {
-
-					@Override
-					public void actionPerformed(ActionEvent e) {
-
-						isPlayByKey = false;
-						playBy.setText("Phương Thức:Chơi Bằng Chuột");
-						gameMode.dispose();
-					}
-				});
-				gameMode.btn[1].addActionListener(new ActionListener() {
-
-					@Override
-					public void actionPerformed(ActionEvent e) {
-						isPlayByKey = true;
-
-						playBy.setText("Phương Thức:Chơi Bằng Phím");
-						gameMode.dispose();
-					}
-				});
-			}
-		});
-
-		// sự kiện cho nút about
-		frameButton[4].addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				backGround.setVisible(false);
-				frameLogo.setVisible(false);
-
-				aboutGame.setVisible(true);
-			}
-		});
-
-		add(frameTop);
-
-		// nút exit nằm ở vị trí đặc biệt
-		frameButton[6] = new JButton();
-		frameButton[6].setIcon(new ImageIcon("files/images/exitbutton.png"));
-		frameButton[6].setSize(200, 50);
-		frameButton[6].setLocation(300, 650);
-		frameButton[6].setBorder(BorderFactory.createEmptyBorder());
-		frameButton[6].setContentAreaFilled(false);
-		backGround.add(frameButton[6]);
-
-		// sự kiện cho nút exit
-		frameButton[6].addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				int check = JOptionPane.showConfirmDialog(null, "Bạn Có Muốn Thoát", "EXIT", JOptionPane.YES_NO_OPTION);
-				if (check == 0) {
-
-					System.exit(0);
-
-				}
-			}
-		});
-
-		add(frameControl);
-		frameControl.setVisible(false);
-		frameTop.setVisible(false);
-		frameTop.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-		frameTop.setBackground(Color.green);
-
-		// sự kiện cho độ khó
-		ActionListener action = new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-
-				if (e.getSource() == frameButton[2]) {
-					hardMode = new HardMode();
-					for (int i = 0; i < hardMode.btn.length; i++) {
-						hardMode.btn[i].setFont(new Font("Serif", Font.ITALIC, 25));
-						hardMode.btn[i].addMouseListener(mouseHover);
-						hardMode.btn[i].addMouseMotionListener(mouseHover);
-
-					}
-					hardMode.btn[0].addActionListener(new ActionListener() {
-
-						@Override
-						public void actionPerformed(ActionEvent e) {
-							FruitsControlThread.speed = 300;
-
-							speed.setText("ĐỘ KHÓ: DỄ");
-							hardMode.dispose();
-						}
-					});
-					hardMode.btn[1].addActionListener(new ActionListener() {
-
-						@Override
-						public void actionPerformed(ActionEvent e) {
-							FruitsControlThread.speed = 180;
-
-							speed.setText("ĐỘ KHÓ: TRUNG BÌNH");
-							hardMode.dispose();
-						}
-					});
-					hardMode.btn[2].addActionListener(new ActionListener() {
-
-						@Override
-						public void actionPerformed(ActionEvent e) {
-							FruitsControlThread.speed = 80;
-
-							speed.setText("ĐỘ KHÓ: KHÓ");
-							hardMode.dispose();
-						}
-					});
-				}
-
-			}
-		};
-		frameButton[2].addActionListener(action);
-
-		// thêm sự kiện độ khó
-
 		// sự kiện nút new game
 		frameButton[0].addActionListener(new ActionListener() {
 
@@ -504,6 +303,120 @@ public class Frame extends JFrame {
 				}
 			}
 		});
+
+		frameButton[1].addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				backGround.setVisible(false);
+				frameLogo.setVisible(false);
+				frameTop.setVisible(true);
+				beginTime = System.currentTimeMillis();
+				endTime = System.currentTimeMillis() + 120000;
+				frameControl.setVisible(true);
+				frameControl.setFocusable(true);
+				frameControl.requestFocusInWindow();
+
+				for (int i = 0; i < frameControl.threadFruit.length; i++) {
+					frameControl.threadFruit[i].setDelay(1 + i * 10);
+					frameControl.threadFruit[i].thread.start();
+
+				}
+
+				if (isPlayByKey) {
+					addKeyListener(new KeyListener() {
+
+						@Override
+						public void keyTyped(KeyEvent e) {
+
+						}
+
+						@Override
+						public void keyReleased(KeyEvent e) {
+
+						}
+
+						@Override
+						public void keyPressed(KeyEvent e) {
+							if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+								MainControlPanel.fruitCatcher.setLocation(-1);
+
+							}
+
+							if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+								MainControlPanel.fruitCatcher.setLocation(1);
+
+							}
+							if (e.getKeyCode() == KeyEvent.VK_SPACE) {
+								FruitsControlThread.isStart = !FruitsControlThread.isStart;
+								MainControlPanel.fruitCatcher.isStart = !MainControlPanel.fruitCatcher.isStart;
+								frameControl.isPause = !frameControl.isPause;
+							}
+						}
+					});
+				} else {
+					MouseAdapter mouse = new MouseAdapter() {
+						@Override
+						public void mouseMoved(MouseEvent e) {
+							MainControlPanel.fruitCatcher.setLocationByMouse(e.getX());
+						}
+
+					};
+					addMouseListener(mouse);
+					addMouseMotionListener(mouse);
+				}
+				frameControl.continueGame();
+			}
+		});
+
+		frameButton[3].addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+
+				GameMode gameMode = new GameMode();
+				for (int i = 0; i < gameMode.btn.length; i++) {
+					gameMode.btn[i].setFont(new Font("Serif", Font.ITALIC, 25));
+					gameMode.btn[i].addMouseListener(mouseHover);
+					gameMode.btn[i].addMouseMotionListener(mouseHover);
+				}
+				gameMode.btn[0].addActionListener(new ActionListener() {
+
+					@Override
+					public void actionPerformed(ActionEvent e) {
+
+						isPlayByKey = false;
+						playBy.setText("Phương Thức:Chơi Bằng Chuột");
+						gameMode.dispose();
+					}
+				});
+				gameMode.btn[1].addActionListener(new ActionListener() {
+
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						isPlayByKey = true;
+
+						playBy.setText("Phương Thức:Chơi Bằng Phím");
+						gameMode.dispose();
+					}
+				});
+			}
+		});
+
+		// sự kiện cho nút about
+		frameButton[4].addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				backGround.setVisible(false);
+				frameLogo.setVisible(false);
+
+				aboutGame.setVisible(true);
+			}
+		});
+
+		add(frameTop);
+
 		// sự kiện phím
 		frameButton[5].addActionListener(new ActionListener() {
 
@@ -516,6 +429,88 @@ public class Frame extends JFrame {
 
 			}
 		});
+
+		// nút exit nằm ở vị trí đặc biệt
+		frameButton[6] = new JButton();
+		frameButton[6].setIcon(new ImageIcon("files/images/exitbutton.png"));
+		frameButton[6].setSize(200, 50);
+		frameButton[6].setLocation(300, 620);
+		frameButton[6].setBorder(BorderFactory.createEmptyBorder());
+		frameButton[6].setContentAreaFilled(false);
+		backGround.add(frameButton[6]);
+
+		// sự kiện cho nút exit
+		frameButton[6].addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				int check = JOptionPane.showConfirmDialog(null, "Bạn Có Muốn Thoát", "EXIT", JOptionPane.YES_NO_OPTION);
+				if (check == 0) {
+
+					System.exit(0);
+
+				}
+			}
+		});
+
+		add(frameControl);
+		frameControl.setVisible(false);
+		frameTop.setVisible(false);
+		frameTop.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+		frameTop.setBackground(Color.green);
+
+		// sự kiện cho độ khó
+		ActionListener action = new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+
+				if (e.getSource() == frameButton[2]) {
+					HardMode hardMode = new HardMode();
+					for (int i = 0; i < hardMode.btn.length; i++) {
+						hardMode.btn[i].setFont(new Font("Serif", Font.ITALIC, 25));
+						hardMode.btn[i].addMouseListener(mouseHover);
+						hardMode.btn[i].addMouseMotionListener(mouseHover);
+
+					}
+					hardMode.btn[0].addActionListener(new ActionListener() {
+
+						@Override
+						public void actionPerformed(ActionEvent e) {
+							FruitsControlThread.speed = 300;
+
+							speed.setText("ĐỘ KHÓ: DỄ");
+							hardMode.dispose();
+						}
+					});
+					hardMode.btn[1].addActionListener(new ActionListener() {
+
+						@Override
+						public void actionPerformed(ActionEvent e) {
+							FruitsControlThread.speed = 180;
+
+							speed.setText("ĐỘ KHÓ: TRUNG BÌNH");
+							hardMode.dispose();
+						}
+					});
+					hardMode.btn[2].addActionListener(new ActionListener() {
+
+						@Override
+						public void actionPerformed(ActionEvent e) {
+							FruitsControlThread.speed = 80;
+
+							speed.setText("ĐỘ KHÓ: KHÓ");
+							hardMode.dispose();
+						}
+					});
+				}
+
+			}
+		};
+		frameButton[2].addActionListener(action);
+
+		// thêm sự kiện độ khó
+
 		// cấu hình cho frame
 		this.setVisible(true);
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
