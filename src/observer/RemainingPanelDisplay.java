@@ -30,7 +30,7 @@ public class RemainingPanelDisplay extends JPanel implements Observer, DisplayVi
 	@Override
 	public JLabel display() {
 		label.setFont(new Font("Serif", Font.ROMAN_BASELINE, 18));
-		label.setLocation(10, 10);
+		label.setLocation(0, 10);
 		label.setText("Còn lại: " + (20 - miss) + "lượt");
 		return label;
 	}

@@ -30,6 +30,7 @@ public class PointPanelDisplay extends JPanel implements Observer, DisplayView {
 	@Override
 	public JLabel display() {
 		label.setFont(new Font("Serif", Font.ROMAN_BASELINE, 18));
+		label.setLocation(150, 10);
 		label.setText("Bắt được: " + point);
 		return label;
 	}

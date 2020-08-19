@@ -35,6 +35,7 @@ public class TotalPanelDisplay extends JPanel implements Observer, DisplayView {
 	@Override
 	public JLabel display() {
 		label.setFont(new Font("Serif", Font.ROMAN_BASELINE, 18));
+		label.setLocation(300, 10);
 		label.setText("Tổng điểm: " + this.total());
 		return label;
 	}

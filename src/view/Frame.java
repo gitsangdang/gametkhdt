@@ -36,9 +36,11 @@ public class Frame extends JFrame {
 	private static final long serialVersionUID = 1L;
 	public static long beginTime;
 	public static long endTime;
+	private MainControlPanel frameControl = new MainControlPanel();
 	private static JPanel frameTop;
 	private LogoPanel frameLogo;
 	private JButton frameButton[] = new JButton[7];
+	private AboutGamePanel aboutGame = new AboutGamePanel();
 
 	boolean isContinue = false;
 	boolean isPlayByKey;
@@ -67,6 +69,10 @@ public class Frame extends JFrame {
 				s.setFont(new Font("Serif", Font.ITALIC, 25));
 			}
 		};
+		frameControl.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));
+		frameControl.setLocation(10, 90);
+		frameControl.setSize(800, 800);
+		
 		// âm thanh(phai la file wav thuan khong ep kieu moi hoat dong)
 		soundThread = new ConTrolVolume();
 		add(soundThread);
@@ -74,13 +80,10 @@ public class Frame extends JFrame {
 
 		setLayout(null);
 
-		AboutGamePanel aboutGame = new AboutGamePanel();
 		aboutGame.setLocation(0, 0);
 		aboutGame.setSize(800, 800);
 		aboutGame.setVisible(false);
 		add(aboutGame);
-		MainControlPanel frameControl = new MainControlPanel();
-		frameControl.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));
 
 		JLabel backGround = new JLabel(new ImageIcon("files/images/backGround.jpg"));
 		backGround.setSize(800, 800);
@@ -93,25 +96,20 @@ public class Frame extends JFrame {
 
 		JLabel framePoint = new PointPanelDisplay().display();
 		framePoint.setSize(0, 0);
-		framePoint.setLocation(10, 20);
 		frameTop.add(framePoint);
 
 		JLabel frameRemaining = new RemainingPanelDisplay().display();
 		frameRemaining.setSize(0, 0);
-		frameRemaining.setLocation(0, 0);
 		frameTop.add(frameRemaining);
 
 		JLabel frameTotal = new TotalPanelDisplay().display();
 		frameTotal.setSize(0, 0);
-		frameTotal.setLocation(60, 20);
 		frameTop.add(frameTotal);
 
 		frameLogo = new LogoPanel();
 		frameLogo.setSize(200, 200);
 		frameLogo.setLocation(300, 50);
 		backGround.add(frameLogo);
-		frameControl.setLocation(10, 90);
-		frameControl.setSize(800, 800);
 
 		JButton saveGame = new JButton("Save Game Và Thoát");
 		saveGame.setLocation(100, 0);

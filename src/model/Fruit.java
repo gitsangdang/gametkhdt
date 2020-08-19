@@ -9,8 +9,8 @@ public class Fruit {
 	private static FruitDecorator apple = new Apple();
 	private static FruitDecorator watermelon = new Watermelon();
 	private static FruitDecorator banana = new Banana();
-	private static FruitDecorator strawberry = new Strawberry();
 	private static FruitDecorator orange = new Orange();
+	private static FruitDecorator strawberry = new Strawberry();
 	private static FruitDecorator boom = new Boom();
 
 	public Fruit() {
@@ -25,28 +25,27 @@ public class Fruit {
 	}
 
 	public void drawFruit(Graphics g, int imageNumber) {
-		if (imageNumber == apple.getImagesNum()) {
+		switch (imageNumber) {
+		case 0:
 			g.drawImage(apple.getFile(), x[0] * 21, y[0] * 21, 40, 40, null);
-		}
-
-		if (imageNumber == watermelon.getImagesNum()) {
+			break;
+		case 1:
 			g.drawImage(watermelon.getFile(), x[0] * 21, y[0] * 21, 40, 40, null);
-		}
-
-		if (imageNumber == banana.getImagesNum()) {
-			g.drawImage(banana.getFile(), x[0] * 21, y[0] * 21, 40, 40, null);
-		}
-
-		if (imageNumber == strawberry.getImagesNum()) {
+			break;
+		case 2:
 			g.drawImage(strawberry.getFile(), x[0] * 21, y[0] * 21, 40, 40, null);
-		}
-
-		if (imageNumber == orange.getImagesNum()) {
+			break;
+		case 3:
 			g.drawImage(orange.getFile(), x[0] * 21, y[0] * 21, 40, 40, null);
-		}
-
-		if (imageNumber == boom.getImagesNum()) {
+			break;
+		case 4:
+			g.drawImage(orange.getFile(), x[0] * 21, y[0] * 21, 40, 40, null);
+			break;
+		case 5:
 			g.drawImage(boom.getFile(), x[0] * 21, y[0] * 21, 40, 40, null);
+			break;
+		default:
+			break;
 		}
 	}
 }
