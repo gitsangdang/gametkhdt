@@ -1,10 +1,10 @@
 eclipse.preferences.version=1
 encoding//src/controller/FruitsControlThread.java=UTF-8
 encoding//src/controller/MainControlPanel.java=UTF-8
+encoding//src/model/AboutGamePanel.java=UTF-8
+encoding//src/model/ConTrolVolume.java=UTF-8
 encoding//src/model/FruitCatcher.java=UTF-8
-encoding//src/view/AboutGamePanel.java=UTF-8
-encoding//src/view/ConTrolVolume.java=UTF-8
+encoding//src/model/GameMode.java=UTF-8
+encoding//src/model/HardMode.java=UTF-8
 encoding//src/view/Frame.java=UTF-8
-encoding//src/view/GameMode.java=UTF-8
-encoding//src/view/HardMode.java=UTF-8
 encoding/<project>=UTF-8

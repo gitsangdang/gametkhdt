@@ -1,4 +1,4 @@
-package view;
+package model;
 
 import java.awt.Font;
 import java.io.File;

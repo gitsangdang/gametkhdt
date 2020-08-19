@@ -23,6 +23,11 @@ import javax.swing.border.BevelBorder;
 
 import controller.FruitsControlThread;
 import controller.MainControlPanel;
+import model.AboutGamePanel;
+import model.ConTrolVolume;
+import model.GameMode;
+import model.HardMode;
+import model.LogoPanel;
 import observer.PointPanelDisplay;
 import observer.RemainingPanelDisplay;
 import observer.TotalPanelDisplay;
