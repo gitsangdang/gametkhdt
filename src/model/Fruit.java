@@ -15,7 +15,7 @@ public class Fruit {
 
 	public Fruit() {
 		Random rd = new Random();
-		int index = rd.nextInt(28);
+		int index = rd.nextInt(20);
 		for (int i = 0; i < x.length; i++) {
 			for (int j = 0; j < y.length; j++) {
 				x[i] = index;

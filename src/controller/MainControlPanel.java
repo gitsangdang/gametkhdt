@@ -33,10 +33,9 @@ public class MainControlPanel extends JPanel implements Runnable {
 	public static int point = 0;
 	public static int miss = 0;
 	long time = 0;
-
 	public static int minute = 0;
-	public boolean isPause = false;
 	public static int second = 0;
+//	public boolean isPause = false;
 
 	public MainControlPanel() {
 
@@ -57,19 +56,20 @@ public class MainControlPanel extends JPanel implements Runnable {
 	}
 
 	public void paint(Graphics g) {
-		drawBackground(g);// phải vẽ ảnh n�?n đầu tiên
+		// phải vẽ ảnh nền đầu tiên
+		drawBackground(g);
+		// ve catcher
 		fruitCatcher.drawFruitCatcher(g);
 
+		// ve trai cay
 		for (int i = 0; i < threadFruit.length; i++) {
-
 			fruit[i].drawFruit(g, i);
-
 		}
 
-		// khi kiemtravacham là true thì hiện ra vụ nổ
+		// khi kiemtravacham là true thì vẽ vụ nổ
 		for (int i = 0; i < threadFruit.length; i++) {
 			if (threadFruit[i].isExplosion) {
-				g.drawImage(threadFruit[0].explosionImg, (FruitCatcher.x[3] - 1) * 21, (FruitCatcher.y[3] - 3) * 21, 80,
+				g.drawImage(threadFruit[0].explosionImg, (FruitCatcher.x[0]) * 21, (FruitCatcher.y[0] - 3) * 21, 80,
 						80, null);
 			}
 
@@ -77,10 +77,10 @@ public class MainControlPanel extends JPanel implements Runnable {
 
 		g.setFont(new Font("Serif", Font.ROMAN_BASELINE, 40));
 		g.setColor(Color.red);
-		if (isPause) {
-			String message = "Tạm Dừng!!";
-			g.drawString(message, 250, 300);
-		}
+//		if (isPause) {
+//			String message = "Tạm Dừng!!";
+//			g.drawString(message, 250, 300);
+//		}
 
 	}
 
@@ -188,7 +188,6 @@ public class MainControlPanel extends JPanel implements Runnable {
 						threadFruit[i].setDelay(1 + i * 10);
 						for (int j = 0; j < 6; j++) {
 							// trái cây xuất hiện random tại một x ngẫu nhiên và y = -3
-							
 							int index = new Random().nextInt(28);
 							threadFruit[i].fruit.x[j] = index;
 							threadFruit[i].fruit.y[j] = -3;
@@ -216,23 +215,19 @@ public class MainControlPanel extends JPanel implements Runnable {
 			for (int i = 0; i < threadFruit.length; i++) {
 
 				if (threadFruit[i].checkCollision()) {
-
 					point++;
-
 					if (i == 5) {
-
 						for (int j = 0; j < threadFruit.length; j++) {
 							threadFruit[j].decreaseSpeed();
 						}
-
 						threadFruit[i].setDelay(100);
 					} else {
 						threadFruit[i].setDelay(10);
 					}
 
 				}
-				
-				//Observer
+
+				// Observer
 				Point p = new Point();
 				new PointPanelDisplay(p);
 				new RemainingPanelDisplay(p);

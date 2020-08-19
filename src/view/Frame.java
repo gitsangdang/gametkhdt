@@ -68,7 +68,6 @@ public class Frame extends JFrame {
 			}
 		};
 		// âm thanh(phai la file wav thuan khong ep kieu moi hoat dong)
-
 		soundThread = new ConTrolVolume();
 		add(soundThread);
 		soundThread.setVisible(false);
@@ -291,7 +290,7 @@ public class Frame extends JFrame {
 							if (e.getKeyCode() == KeyEvent.VK_SPACE) {
 								FruitsControlThread.isStart = !FruitsControlThread.isStart;
 								MainControlPanel.fruitCatcher.isStart = !MainControlPanel.fruitCatcher.isStart;
-								frameControl.isPause = !frameControl.isPause;
+//								frameControl.isPause = !frameControl.isPause;
 							}
 						}
 					});
@@ -355,7 +354,7 @@ public class Frame extends JFrame {
 							if (e.getKeyCode() == KeyEvent.VK_SPACE) {
 								FruitsControlThread.isStart = !FruitsControlThread.isStart;
 								MainControlPanel.fruitCatcher.isStart = !MainControlPanel.fruitCatcher.isStart;
-								frameControl.isPause = !frameControl.isPause;
+//								frameControl.isPause = !frameControl.isPause;
 							}
 						}
 					});

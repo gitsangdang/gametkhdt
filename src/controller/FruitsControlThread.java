@@ -28,7 +28,7 @@ public class FruitsControlThread implements Runnable {
 	public boolean isHelp = false;
 
 	public FruitsControlThread(Fruit fruit) {
-
+		// mở file âm thanh. Ghi âm thanh khi va chạm
 		try {
 			goalSound = AudioSystem.getClip();
 			goalSound.open(AudioSystem.getAudioInputStream(new File("files/musics/point.wav")));
@@ -50,17 +50,13 @@ public class FruitsControlThread implements Runnable {
 
 		while (true) {
 			if (isStart) {
-
-				if (fruit.y[3] == 28) {
-
+				if (fruit.y[0] == 28) {
 					MainControlPanel.miss++;
 				}
-				if (fruit.y[3] < 31) {
+				if (fruit.y[0] < 30) {
 					// phần dưới của trái cây chưa chạm đất:y[2] hoặc y[3]
 					if (this.delay == 0) {
-
-						for (int i = 0; i < 4; i++) {
-
+						for (int i = 0; i < 6; i++) {
 							fruit.y[i]++;
 						}
 					} else {
@@ -69,7 +65,7 @@ public class FruitsControlThread implements Runnable {
 						}
 					}
 				} else {
-					// trái cây xuất hiện random tại một x ngẫu nhiên và y = -3
+//				 trái cây xuất hiện random tại một x ngẫu nhiên và y = -3
 					for (int i = 0; i < 6; i++) {
 						for (int j = 0; j < 6; j++) {
 							int index = new Random().nextInt(28);
@@ -77,7 +73,6 @@ public class FruitsControlThread implements Runnable {
 							fruit.y[j] = -3;
 						}
 					}
-
 				}
 
 				// thời gian vụ nổ tồn tại
@@ -124,12 +119,14 @@ public class FruitsControlThread implements Runnable {
 	public boolean checkCollision() {
 		for (int i = 0; i < 6; i++) {
 
-			if ((fruit.y[2] == FruitCatcher.y[i] || fruit.y[3] == FruitCatcher.y[i])
-					&& (fruit.x[2] == FruitCatcher.x[i] || fruit.x[3] == FruitCatcher.x[i])) {
+			if ((fruit.y[0] == FruitCatcher.y[i] || fruit.y[0] == FruitCatcher.y[i])
+					&& (fruit.x[0] == FruitCatcher.x[i] || fruit.x[0] == FruitCatcher.x[i])) {
 				if (goalSound.isOpen()) {
 					goalSound.setFramePosition(0);
 				}
 				goalSound.start();
+
+				// khi va cham roi. Random ra fruit o vi tri khac
 				int index = new Random().nextInt(28);
 				for (int j = 0; j < 6; j++) {
 					fruit.x[j] = index;

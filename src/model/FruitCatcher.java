@@ -8,6 +8,7 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 public class FruitCatcher {
+	
 	public static int x[] = new int[6];
 	public static int y[] = new int[6];
 	public boolean isStart = true;
@@ -20,13 +21,15 @@ public class FruitCatcher {
 			e.printStackTrace();
 		}
 
+		// set vi no, set vi tri xuat hien cua catcher
 		for (int i = 0; i < 6; i++) {
 			x[i] = i + 12;
-			y[i] = 26;
+			y[i] = 23;
 		}
 
 	}
 
+	// set vi tri catcher
 	public void setLocation(int n) {
 		if (isStart) {
 
