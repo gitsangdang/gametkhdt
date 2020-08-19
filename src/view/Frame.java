@@ -386,7 +386,7 @@ public class Frame extends JFrame {
 					public void actionPerformed(ActionEvent e) {
 
 						isPlayByKey = false;
-						playBy.setText("Phương Thức:Chơi Bằng Chuột");
+						playBy.setText("Chơi Bằng Chuột");
 						gameMode.dispose();
 					}
 				});
@@ -396,7 +396,7 @@ public class Frame extends JFrame {
 					public void actionPerformed(ActionEvent e) {
 						isPlayByKey = true;
 
-						playBy.setText("Phương Thức:Chơi Bằng Phím");
+						playBy.setText("Chơi Bằng Phím");
 						gameMode.dispose();
 					}
 				});
@@ -507,10 +507,9 @@ public class Frame extends JFrame {
 
 			}
 		};
-		frameButton[2].addActionListener(action);
-
 		// thêm sự kiện độ khó
-
+		frameButton[2].addActionListener(action);
+	
 		// cấu hình cho frame
 		this.setVisible(true);
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);

@@ -11,7 +11,7 @@ public class Fruit {
 	private static FruitDecorator banana = new Banana();
 	private static FruitDecorator strawberry = new Strawberry();
 	private static FruitDecorator orange = new Orange();
-	private static FruitDecorator mango = new Mango();
+	private static FruitDecorator boom = new Boom();
 
 	public Fruit() {
 		Random rd = new Random();
@@ -45,8 +45,8 @@ public class Fruit {
 			g.drawImage(orange.getFile(), x[0] * 21, y[0] * 21, 40, 40, null);
 		}
 
-		if (imageNumber == mango.getImagesNum()) {
-			g.drawImage(mango.getFile(), x[0] * 21, y[0] * 21, 40, 40, null);
+		if (imageNumber == boom.getImagesNum()) {
+			g.drawImage(boom.getFile(), x[0] * 21, y[0] * 21, 40, 40, null);
 		}
 	}
 }

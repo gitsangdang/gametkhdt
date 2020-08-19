@@ -5,11 +5,11 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
-public class Mango extends FruitDecorator {
-	public Mango() {
+public class Boom extends FruitDecorator {
+	public Boom() {
 		super();
-		name = "MANGO";
-		path = "files/fruit/mango.png";
+		name = "BOOM";
+		path = "files/fruit/boom.png";
 		try {
 			file = ImageIO.read(new File(path));
 		} catch (IOException e) {
